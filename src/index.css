@@ -2,5 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { font-family: Inter, ui-sans-serif, system-ui; }
-body { @apply bg-slate-50 text-slate-800; }
+:root { font-family: 'Inter', ui-sans-serif, system-ui; }
+body {
+  @apply text-slate-800;
+  background-color: #f4f8fb;
+  background-image:
+    linear-gradient(rgba(11, 46, 74, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 46, 74, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
