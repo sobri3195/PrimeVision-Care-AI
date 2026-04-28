@@ -1,0 +1,1 @@
+import Card from '@/components/shared/Card'; export default function CheckoutSummary({ total }: { total: number }) { return <Card><p>Checkout ini hanya simulasi prototype.</p><p className="font-bold">Total: Rp{total.toLocaleString('id-ID')}</p></Card>; }
