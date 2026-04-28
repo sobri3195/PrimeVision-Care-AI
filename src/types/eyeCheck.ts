@@ -52,6 +52,9 @@ export type EyeCheckResult = {
   confidenceBand: 'rendah' | 'sedang' | 'tinggi';
   explainabilityFactors: string[];
   diseaseRisks: DiseaseRisk[];
+  carePlan: string[];
+  followUpWindowDays: number;
+  recommendedProductKeywords: string[];
   preTriageSummary: string;
 };
 

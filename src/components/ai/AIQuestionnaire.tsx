@@ -23,6 +23,17 @@ const booleanFieldMeta: Array<{ key: keyof EyeCheckInput; label: string }> = [
   { key: 'usesContactLens', label: 'Pemakai lensa kontak' },
 ];
 
+const numberRange: Partial<Record<keyof EyeCheckInput, { min: number; max: number }>> = {
+  age: { min: 1, max: 110 },
+  screenTime: { min: 0, max: 24 },
+  dmDurationYears: { min: 0, max: 80 },
+  latestHbA1c: { min: 4, max: 18 },
+  airConditionedRoomHours: { min: 0, max: 24 },
+  sleepHours: { min: 0, max: 24 },
+  childNearWorkHours: { min: 0, max: 16 },
+  childOutdoorHours: { min: 0, max: 16 },
+};
+
 export default function AIQuestionnaire({ form, setForm }: { form: EyeCheckInput; setForm: (next: EyeCheckInput) => void }) {
   const toggle = (key: keyof EyeCheckInput) => {
     const value = form[key];
@@ -30,7 +41,14 @@ export default function AIQuestionnaire({ form, setForm }: { form: EyeCheckInput
     setForm({ ...form, [key]: !value });
   };
 
-  const setNumber = (key: keyof EyeCheckInput, value: string) => setForm({ ...form, [key]: Number(value) });
+  const setNumber = (key: keyof EyeCheckInput, value: string) => {
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed)) return;
+
+    const range = numberRange[key];
+    const nextValue = range ? Math.min(range.max, Math.max(range.min, parsed)) : parsed;
+    setForm({ ...form, [key]: nextValue });
+  };
 
   return (
     <div className="space-y-4">
