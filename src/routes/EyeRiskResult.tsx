@@ -53,6 +53,9 @@ const fallback: EyeCheckRecord = {
   confidenceBand: 'rendah',
   explainabilityFactors: [],
   diseaseRisks: [],
+  carePlan: [],
+  followUpWindowDays: 30,
+  recommendedProductKeywords: [],
   preTriageSummary: '-',
 };
 
@@ -79,6 +82,16 @@ export default function EyeRiskResult() {
       </Card>
 
       <Card>
+        <p className="font-semibold">Rencana Aksi Harian</p>
+        <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-slate-700">
+          {result.carePlan.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="mt-2 text-xs text-slate-500">Target follow-up: {result.followUpWindowDays === 0 ? 'hari ini' : `${result.followUpWindowDays} hari`}</p>
+      </Card>
+
+      <Card>
         <p className="font-semibold">Explainability</p>
         <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-slate-700">
           {result.explainabilityFactors.map((factor) => (
@@ -86,6 +99,19 @@ export default function EyeRiskResult() {
           ))}
         </ul>
       </Card>
+
+      {result.recommendedProductKeywords.length > 0 ? (
+        <Card>
+          <p className="font-semibold">Rekomendasi Produk AI</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {result.recommendedProductKeywords.map((keyword) => (
+              <span key={keyword} className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">
+                {keyword}
+              </span>
+            ))}
+          </div>
+        </Card>
+      ) : null}
 
       <Card>
         <p className="font-semibold">Skrining Penyakit Mata</p>

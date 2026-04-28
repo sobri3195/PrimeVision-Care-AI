@@ -3,17 +3,24 @@ import Card from '@/components/shared/Card';
 import Button from '@/components/shared/Button';
 import { analyzeEyeSymptoms, hasAiConfig, type SymptomMessage } from '@/lib/aiAssistant';
 
+const quickPrompts = [
+  'Mata kiri saya merah dan nyeri sejak kemarin malam.',
+  'Saya sering melihat buram setelah menatap layar lebih dari 6 jam.',
+  'Ada kilatan cahaya dan bintik hitam mendadak di mata kanan.',
+];
+
 export default function SymptomChatBox() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<SymptomMessage[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [lastSource, setLastSource] = useState<'openai' | 'fallback' | null>(null);
 
   const placeholder = useMemo(
     () =>
       hasAiConfig
         ? 'Contoh: Mata kiri saya merah dan nyeri sejak 2 hari, apakah perlu ke dokter?'
-        : 'Aktifkan VITE_OPENAI_API_KEY untuk analisa AI real-time.',
+        : 'Mode fallback aktif. Tambahkan VITE_OPENAI_API_KEY untuk AI real-time.',
     [],
   );
 
@@ -30,6 +37,7 @@ export default function SymptomChatBox() {
 
     try {
       const result = await analyzeEyeSymptoms(trimmed, messages);
+      setLastSource(result.source);
       setMessages((prev) => [...prev, { role: 'assistant', content: result.answer }]);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Terjadi kendala saat meminta analisa AI.');
@@ -46,6 +54,19 @@ export default function SymptomChatBox() {
           <p className="text-sm text-slate-600">
             Jelaskan gejala Anda, AI akan membantu analisa awal dan saran langkah berikutnya.
           </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {quickPrompts.map((prompt) => (
+            <button
+              key={prompt}
+              type="button"
+              className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600"
+              onClick={() => setInput(prompt)}
+            >
+              {prompt}
+            </button>
+          ))}
         </div>
 
         <div className="max-h-64 space-y-2 overflow-y-auto rounded-xl bg-slate-50 p-3">
@@ -74,6 +95,12 @@ export default function SymptomChatBox() {
           onChange={(event) => setInput(event.target.value)}
           placeholder={placeholder}
         />
+
+        {lastSource ? (
+          <p className="text-xs text-slate-500">
+            Mode jawaban: {lastSource === 'openai' ? 'AI real-time' : 'fallback rule-based'}.
+          </p>
+        ) : null}
 
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
 
