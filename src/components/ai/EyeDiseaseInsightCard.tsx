@@ -1,31 +1,28 @@
 import Card from '@/components/shared/Card';
+import { loadLS } from '@/lib/utils';
+import { summarizeDiseaseInsight } from '@/lib/aiFeatureEngine';
+import type { EyeCheckRecord } from '@/types/eyeCheck';
 
 export default function EyeDiseaseInsightCard() {
+  const history = loadLS<EyeCheckRecord[]>('eyeCheckHistory', []);
+  const latest = history[0] ?? null;
+  const summary = summarizeDiseaseInsight(latest);
+
   return (
     <Card>
       <div className="space-y-3">
         <div>
           <p className="font-semibold">AI Insight Penyakit Mata</p>
-          <p className="text-sm text-slate-600">Screening awal untuk risiko glaukoma, retinopati diabetik, katarak, dan mata kering kronis.</p>
+          <p className="text-sm text-slate-600">Insight dinamis dari hasil skrining terbaru dan faktor risiko personal.</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="rounded-xl bg-emerald-50 p-3">
-            <p className="font-semibold text-emerald-700">Glaukoma</p>
-            <p className="text-slate-600">Cek faktor umur, riwayat keluarga, dan tekanan darah.</p>
-          </div>
-          <div className="rounded-xl bg-orange-50 p-3">
-            <p className="font-semibold text-orange-700">Katarak</p>
-            <p className="text-slate-600">Deteksi gejala silau berlebih, buram progresif, dan kontras rendah.</p>
-          </div>
-          <div className="rounded-xl bg-cyan-50 p-3">
-            <p className="font-semibold text-cyan-700">Retina Diabetes</p>
-            <p className="text-slate-600">Analisa risiko berdasar kontrol gula darah dan lama diabetes.</p>
-          </div>
-          <div className="rounded-xl bg-violet-50 p-3">
-            <p className="font-semibold text-violet-700">Mata Kering</p>
-            <p className="text-slate-600">Skor kualitas air mata dan paparan AC/screen time.</p>
-          </div>
+        <div className="rounded-xl bg-slate-50 p-3 text-sm text-slate-700">
+          <p className="font-semibold">{summary.headline}</p>
+          <ul className="mt-2 list-disc space-y-1 pl-5">
+            {summary.priorities.map((priority) => (
+              <li key={priority}>{priority}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </Card>
