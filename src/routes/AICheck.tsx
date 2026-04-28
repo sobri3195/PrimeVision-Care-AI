@@ -10,6 +10,9 @@ import DiabetesEyeCheckCard from '@/components/ai/DiabetesEyeCheckCard';
 import MyopiaTrackerCard from '@/components/ai/MyopiaTrackerCard';
 import PostOpCheckCard from '@/components/ai/PostOpCheckCard';
 import SymptomChatBox from '@/components/ai/SymptomChatBox';
+import EyeCameraScanCard from '@/components/ai/EyeCameraScanCard';
+import EyeHabitCoachCard from '@/components/ai/EyeHabitCoachCard';
+import EyeDiseaseInsightCard from '@/components/ai/EyeDiseaseInsightCard';
 import { runAiRiskEngine } from '@/lib/aiRiskEngine';
 import type { EyeCheckInput } from '@/types/eyeCheck';
 import { saveLS } from '@/lib/utils';
@@ -19,16 +22,29 @@ const initial: EyeCheckInput = { age: 30, symptoms: '', screenTime: 8, diabetes:
 export default function AICheck() {
   const [form, setForm] = useState<EyeCheckInput>(initial);
   const navigate = useNavigate();
+
   const submit = () => {
     const result = runAiRiskEngine(form);
     saveLS('lastRiskScore', result.riskScore);
     saveLS('lastEyeCheck', { ...form, ...result });
     navigate('/ai-check/result');
   };
+
   return (
     <div className="space-y-4 px-4 pb-4">
       <TopBar title="Cek Mata AI" />
-      <Card><p className="font-semibold">Cek risiko mata Anda dalam 2 menit.</p><AIQuestionnaire form={form} setForm={setForm} /><Button className="mt-3 w-full" onClick={submit}>Lihat Hasil AI</Button></Card>
+
+      <Card>
+        <p className="font-semibold">Cek risiko mata Anda dalam 2 menit.</p>
+        <AIQuestionnaire form={form} setForm={setForm} />
+        <Button className="mt-3 w-full" onClick={submit}>
+          Lihat Hasil AI
+        </Button>
+      </Card>
+
+      <EyeCameraScanCard />
+      <EyeDiseaseInsightCard />
+      <EyeHabitCoachCard />
       <LasikReadinessCard />
       <DiabetesEyeCheckCard />
       <MyopiaTrackerCard />
