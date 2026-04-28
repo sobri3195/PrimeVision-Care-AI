@@ -1,0 +1,7 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="14" fill="#0F172A"/>
+  <circle cx="32" cy="28" r="16" stroke="#38BDF8" stroke-width="4"/>
+  <circle cx="32" cy="28" r="5" fill="#38BDF8"/>
+  <path d="M16 28C18.7 22.8 24.1 19 32 19C39.9 19 45.3 22.8 48 28" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round"/>
+  <text x="18" y="51" fill="#E2E8F0" font-size="12" font-family="Arial, sans-serif" font-weight="700">PV</text>
+</svg>
