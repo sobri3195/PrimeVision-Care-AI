@@ -41,20 +41,6 @@ export default function AIQuestionnaire({ form, setForm }: { form: EyeCheckInput
 
       <input className="w-full rounded-xl border p-3" value={form.symptoms} onChange={(e) => setForm({ ...form, symptoms: e.target.value })} placeholder="Keluhan utama" />
 
-      <div className="grid grid-cols-2 gap-2">
-        <input type="number" className="w-full rounded-xl border p-3" value={form.dmDurationYears} onChange={(e) => setNumber('dmDurationYears', e.target.value)} placeholder="Durasi DM (tahun)" />
-        <input type="number" step="0.1" className="w-full rounded-xl border p-3" value={form.latestHbA1c} onChange={(e) => setNumber('latestHbA1c', e.target.value)} placeholder="HbA1c terakhir" />
-      </div>
-
-      <div className="grid grid-cols-2 gap-2">
-        <input type="number" className="w-full rounded-xl border p-3" value={form.airConditionedRoomHours} onChange={(e) => setNumber('airConditionedRoomHours', e.target.value)} placeholder="Jam di ruangan AC" />
-        <input type="number" className="w-full rounded-xl border p-3" value={form.sleepHours} onChange={(e) => setNumber('sleepHours', e.target.value)} placeholder="Jam tidur" />
-      </div>
-
-      <div className="grid grid-cols-2 gap-2">
-        <input type="number" className="w-full rounded-xl border p-3" value={form.childNearWorkHours} onChange={(e) => setNumber('childNearWorkHours', e.target.value)} placeholder="Near-work anak (jam)" />
-        <input type="number" className="w-full rounded-xl border p-3" value={form.childOutdoorHours} onChange={(e) => setNumber('childOutdoorHours', e.target.value)} placeholder="Outdoor anak (jam)" />
-      </div>
 
       <div className="grid grid-cols-1 gap-2 text-xs sm:grid-cols-2">
         {booleanFieldMeta.map((field) => (
