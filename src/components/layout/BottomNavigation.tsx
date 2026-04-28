@@ -6,7 +6,7 @@ const items = [
   { to: '/', label: 'Beranda', icon: Home },
   { to: '/ai-check', label: 'Cek AI', icon: Activity },
   { to: '/education', label: 'Edukasi', icon: BookOpen },
-  { to: '/booking', label: 'Booking', icon: ShoppingBag },
+  { to: '/marketplace', label: 'Marketplace', icon: ShoppingBag },
   { to: '/profile', label: 'Profil', icon: User },
 ];
 

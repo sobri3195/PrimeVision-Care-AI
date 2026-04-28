@@ -4,12 +4,14 @@ import Button from '@/components/shared/Button';
 
 export default function HeroCard() {
   return (
-    <Card className="bg-gradient-to-br from-primeNavy to-sky-900 text-white">
-      <p className="text-lg font-bold">Cek risiko mata Anda dalam 2 menit</p>
-      <p className="mt-1 text-sm text-slate-200">Dapatkan skor mata dan rekomendasi awal.</p>
+    <Card className="overflow-hidden bg-gradient-to-br from-primeNavy via-sky-900 to-sky-700 text-white">
+      <div className="space-y-2">
+        <p className="text-lg font-bold">Cek risiko mata Anda dalam 2 menit</p>
+        <p className="text-sm text-slate-100">Dapatkan skor mata, insight AI, dan rekomendasi produk sesuai kebutuhan mata Anda.</p>
+      </div>
       <div className="mt-4 grid grid-cols-2 gap-2">
-        <Link to="/ai-check"><Button className="w-full bg-primeGold text-primeNavy">Mulai Cek Mata AI</Button></Link>
-        <Link to="/booking"><Button className="w-full bg-white text-primeNavy">Booking Pemeriksaan</Button></Link>
+        <Link to="/ai-check"><Button className="w-full bg-primeGold text-primeNavy">Mulai Cek AI</Button></Link>
+        <Link to="/marketplace"><Button className="w-full bg-white text-primeNavy">Lihat Marketplace</Button></Link>
       </div>
     </Card>
   );
