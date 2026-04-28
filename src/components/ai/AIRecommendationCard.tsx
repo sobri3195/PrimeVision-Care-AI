@@ -6,7 +6,8 @@ export default function AIRecommendationCard({ result }: { result: EyeCheckResul
     <Card>
       <p className="font-semibold">Rekomendasi AI</p>
       <p className="text-sm text-slate-600">{result.recommendation}</p>
-      <p className="mt-2 text-sm">Topik edukasi: <b>{result.suggestedEducationTopic}</b></p>
+      <p className="mt-2 text-sm">Aksi lanjutan: <b>{result.suggestedAction}</b></p>
+      <p className="mt-1 text-sm">Topik edukasi: <b>{result.suggestedEducationTopic}</b></p>
     </Card>
   );
 }

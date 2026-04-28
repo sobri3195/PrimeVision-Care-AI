@@ -1,8 +1,8 @@
-import type { EyeCheckRecord } from '@/types/eyeCheck';
+import type { EyeCheckInput, EyeCheckRecord } from '@/types/eyeCheck';
 import { runAiRiskEngine } from '@/lib/aiRiskEngine';
 
 export const mockEyeChecks: EyeCheckRecord[] = Array.from({ length: 300 }, (_, i) => {
-  const input = {
+  const input: EyeCheckInput = {
     age: 12 + (i % 65),
     symptoms: ['Mata lelah', 'Penglihatan buram', 'Mata kering'][i % 3],
     screenTime: 2 + (i % 11),
@@ -16,8 +16,26 @@ export const mockEyeChecks: EyeCheckRecord[] = Array.from({ length: 300 }, (_, i
     familyHistory: i % 7 === 0,
     lasikInterest: i % 9 === 0,
     postOpStatus: i % 15 === 0,
+    suddenSeverePain: i % 40 === 0,
+    suddenVisionLoss: i % 47 === 0,
+    flashesOrFloaters: i % 34 === 0,
+    eyeTrauma: i % 50 === 0,
+    redEyeWithNausea: i % 44 === 0,
+    dmDurationYears: i % 16,
+    latestHbA1c: 6 + (i % 4) * 0.7,
+    retinaCheckOverYear: i % 3 === 0,
+    glareAtNight: i % 5 === 0,
+    lowContrastVision: i % 6 === 0,
+    progressiveBilateralBlur: i % 7 === 0,
+    usesContactLens: i % 4 === 0,
+    airConditionedRoomHours: 2 + (i % 8),
+    sleepHours: 5 + (i % 4),
+    childNearWorkHours: 1 + (i % 6),
+    childOutdoorHours: i % 4,
   };
+
   const result = runAiRiskEngine(input);
+
   return {
     id: `ec-${i + 1}`,
     ...input,
