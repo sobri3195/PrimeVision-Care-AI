@@ -1,0 +1,2 @@
+import TopBar from '@/components/layout/TopBar'; import { mockFamilyMembers } from '@/data/mockFamilyMembers'; import FamilyMemberCard from '@/components/profile/FamilyMemberCard';
+export default function FamilyPassport(){return <div className="space-y-4 px-4"><TopBar title="Family Eye Passport"/>{mockFamilyMembers.map((m)=><FamilyMemberCard key={m.id} text={`${m.name} (${m.relation}) - skor ${m.riskScore}`} />)}</div>}
