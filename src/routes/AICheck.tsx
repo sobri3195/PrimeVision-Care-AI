@@ -9,6 +9,7 @@ import LasikReadinessCard from '@/components/ai/LasikReadinessCard';
 import DiabetesEyeCheckCard from '@/components/ai/DiabetesEyeCheckCard';
 import MyopiaTrackerCard from '@/components/ai/MyopiaTrackerCard';
 import PostOpCheckCard from '@/components/ai/PostOpCheckCard';
+import SymptomChatBox from '@/components/ai/SymptomChatBox';
 import { runAiRiskEngine } from '@/lib/aiRiskEngine';
 import type { EyeCheckInput } from '@/types/eyeCheck';
 import { saveLS } from '@/lib/utils';
@@ -32,6 +33,7 @@ export default function AICheck() {
       <DiabetesEyeCheckCard />
       <MyopiaTrackerCard />
       <PostOpCheckCard />
+      <SymptomChatBox />
       <DisclaimerBanner />
     </div>
   );
